@@ -163,8 +163,6 @@ def add_to_azure(user_data):
     tupe = convert_to_tuple(temp_list)
     user_records = ", ".join(["%s"] * len(temp_list))
     insert_employee(connection, tupe, user_records)
-
-    
     connection.close()
 
 #===========================================================================#

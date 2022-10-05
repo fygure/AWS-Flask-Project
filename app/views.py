@@ -125,6 +125,15 @@ def profile(userid):
 
     return render_template("public/profile.html", user=user)
 #===================================================================#
+@app.route("/deleteuser", methods=["DELETE"])
+def del_user():
+
+    # if request.method == "DELETE":
+
+    #     print("DELETE")
+
+
+    return render_template("public/deleteuser.html")
 
 #===================================================================#
 
