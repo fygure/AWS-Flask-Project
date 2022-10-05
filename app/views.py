@@ -1,7 +1,7 @@
 #Contains all views/routes
 from doctest import script_from_examples
 from app import app
-from app.data_scripting.setup import get_employees_azure
+from app.data_scripting.setup import get_employees_azure, get_user_info
 from flask import render_template, request, redirect
 from datetime import datetime
 
@@ -12,8 +12,7 @@ def index():
 
     users = get_employees_azure()
 
-
-    return render_template("public/index.html")
+    return render_template("public/index.html", users=users)
 #===================================================================#
 @app.route("/about")
 def about():
@@ -113,18 +112,15 @@ users = {
     }
 }
 #===================================================================#
+@app.route("/profile/<userid>")
+def profile(userid):
 
-@app.route("/profile/<username>")
-def profile(username):
-
-    user = None
-
-    if username in users:
-        user = users[username]
-
+    user = get_user_info(userid)[0]
     print(user)
 
-    return render_template("public/profile.html", username=username, user=user)
+
+
+    return render_template("public/profile.html", user=user)
 #===================================================================#
 
 #===================================================================#

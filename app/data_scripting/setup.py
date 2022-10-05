@@ -142,7 +142,12 @@ def get_employees_azure():
 
 #print(get_employees_azure())
 #===========================================================================#
-
+def get_user_info(userid):
+    connection = create_connection(DB_NAME, DB_USER, DB_PW, DB_HOST, DB_PORT)
+    select_employee = f"SELECT * FROM employees WHERE id = '{userid}'"
+    employee = execute_read_query(connection, select_employee)
+    connection.close()
+    return employee
 
 #===========================================================================#
 #===========================================================================#

@@ -9,6 +9,39 @@
         <div class="col">
             <h1>Home</h1>
             <hr>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th title="Username">Username</th>
+                        <th title="User Group">Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>
+                            <a href=" {{ url_for('profile', userid=user[1]) }} ">
+                                {{ user[0] }}
+                            </a>
+                        </td>
+                        <td>
+                            {{ user[4] }}
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+
+
+
+            </table>
+
+
+
+
+
+
         </div>
     </div>
 </div>

@@ -13,12 +13,38 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4>{{ username }}</h4>
-                    <hr>
                     {% if user %}
-                    <p><strong>Username: {{ user["name"] }}</strong></p>
-                    <p class="text-muted">Bio: {{ user["bio"] }}</p>
-                    <p><em>PLAYER</em></p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th title="Username">Username</th>
+                                <th title="ID">ID</th>
+                                <th title="ARN ID">ARN ID</th>
+                                <th title="Date Created">Date Created</th>
+                                <th title="User Group">Group</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ user[0] }}
+                                </td>
+                                <td>
+                                    {{ user[1] }}
+                                </td>
+                                <td>
+                                    {{ user[2] }}
+                                </td>
+                                <td>
+                                    {{ user[3] }}
+                                </td>
+                                <td>
+                                    {{ user[4] }}
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
                     {% else %}
                     <p>User not found</p>
                     {% endif %}
