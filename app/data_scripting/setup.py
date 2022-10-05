@@ -61,11 +61,11 @@ def json_serial(obj):
 #execute_query(connection, create_users_table)
 #===========================================================================#
 """BELOW CONTAINS DATA PULLED FROM AWS IAM ACCOUNT"""
-name_list = iam_functions.list_iam_users()
+#name_list = iam_functions.list_iam_users()
 #print(name_list)
 
 # UNCOMMENT TO TEST INDIVIDUAL BELOW
-# user_info = iam_functions.get_user_info("MAX")
+# user_info = iam_functions.get_user_info_iam("MAX")
 # group_info_user = iam_functions.get_user_group("MAX")
 # username = user_info["User"]["UserName"]
 # user_ID = user_info["User"]["UserId"]
@@ -76,19 +76,19 @@ name_list = iam_functions.list_iam_users()
 #print(p1.user_arn)
 
 # Parse data below to insert query
-users = []
+# users = []
 
-for name in name_list:
-    info = iam_functions.get_user_info(name)
-    groups = iam_functions.get_user_group(name)
-    temp_list = []
-    temp_list.append(info["User"]["UserName"])
-    temp_list.append(info["User"]["UserId"])
-    temp_list.append(info["User"]["Arn"])
-    temp_list.append(json_serial(info["User"]["CreateDate"]))
-    temp_list.append(groups["Groups"][0]["GroupName"])
-    tupe = convert_to_tuple(temp_list)
-    users.append(tupe)
+# for name in name_list:
+#     info = iam_functions.get_user_info(name)
+#     groups = iam_functions.get_user_group(name)
+#     temp_list = []
+#     temp_list.append(info["User"]["UserName"])
+#     temp_list.append(info["User"]["UserId"])
+#     temp_list.append(info["User"]["Arn"])
+#     temp_list.append(json_serial(info["User"]["CreateDate"]))
+#     temp_list.append(groups["Groups"][0]["GroupName"])
+#     tupe = convert_to_tuple(temp_list)
+#     users.append(tupe)
 
 # for i in users:
 #     print(i)
@@ -129,8 +129,7 @@ for name in name_list:
 # connection.commit()
 
 
-
-
+"""FUNCTIONS BELOW! (TO BE CALLED IN VIEWS.PY)"""
 #===========================================================================#
 # GRABS DATA FROM DATABASE
 def get_employees_azure():
@@ -150,6 +149,24 @@ def get_user_info(userid):
     return employee
 
 #===========================================================================#
+def add_to_azure(user_data):
+    connection = create_connection(DB_NAME, DB_USER, DB_PW, DB_HOST, DB_PORT)
+    #REDUNDANT.. FIX LATER PLS
+    username = user_data["User"]["UserName"]
+    group_info_user = iam_functions.get_user_group(username)
+    temp_list = []
+    temp_list.append(user_data["User"]["UserName"])
+    temp_list.append(user_data["User"]["UserId"])
+    temp_list.append(user_data["User"]["Arn"])
+    temp_list.append(json_serial(user_data["User"]["CreateDate"]))
+    temp_list.append(group_info_user["Groups"][0]["GroupName"])
+    tupe = convert_to_tuple(temp_list)
+    user_records = ", ".join(["%s"] * len(temp_list))
+    insert_employee(connection, tupe, user_records)
+
+    
+    connection.close()
+
 #===========================================================================#
 #===========================================================================#
 #===========================================================================#

@@ -18,6 +18,16 @@ def create_iam_user(user_name):
 # responseObject = iam_functions.create_iam_user("Test1")
 # print(responseObject)
 #===========================================================================#
+def add_user_to_default_group(user_name):
+    try:
+        iam_client = boto3.client('iam')
+        iam_client.add_user_to_group(GroupName='Janitors', UserName=user_name)
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'EntityAlreadyExists':
+            print("Object already exists.")
+        else:
+            print(f"Unexpected error: '{e}'")
+#===========================================================================#
 # List all IAM users
 def list_iam_users():
     try:
@@ -167,7 +177,7 @@ def detach_managed_policy_from_user(policy_name, username):
 # TEST CODE IN SERVER
 #detach_managed_policy_from_user("AWSMarketplaceFullAccess", "MAX")
 #===========================================================================#
-def get_user_info(username):
+def get_user_info_iam(username):
     try:
         #sts = boto3.client('sts')
         #account_id = sts.get_caller_identity()['Account']
