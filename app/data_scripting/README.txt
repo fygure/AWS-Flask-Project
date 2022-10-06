@@ -13,7 +13,7 @@ $git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch .env" HE
 
 
 #If accidentally added .env file to git do below
-$git rm -r --cached .env
+$git rm -r --cached .env (define path to .env)
 
 
 #Django commands
