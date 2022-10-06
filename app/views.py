@@ -19,12 +19,10 @@ def index():
 # @app.route("/about")
 # def about():
 #     return render_template("public/about.html")
-
 #===================================================================#
 # @app.route("/userlist")
 # def userlist():
 #     return render_template("public/userlist.html")
-
 #===================================================================#
 # @app.route("/jinja")
 # def jinja():
@@ -81,39 +79,34 @@ def sign_up():
 
         username = req["username"]
 
+        # add error handling here to catch if user puts space in string
+        flag = False
+        for i in username:
+            if i.isspace():
+                flag = True
         
         print(username)
 
+        if not flag:
     # function that will create an IAMs account for usernmame
-        create_iam_user(username)
-        add_user_to_default_group(username) #defaulted to 'Janitors' lol
+            create_iam_user(username)
+            add_user_to_default_group(username) #defaulted to 'Janitors' lol
     # function to grab the new user's IAM's info and then query into azure database
-        user_data = get_user_info_iam(username)
-        add_to_azure(user_data)
-        
-
-
-        return redirect("/") #req.url
+            user_data = get_user_info_iam(username)
+            add_to_azure(user_data)
+            return redirect("/") #req.url
+        else:
+            # add could not add user page error below (FIXME)
+            return redirect("/notfound")
     
  
     
     return render_template("public/createuser.html")
 #===================================================================#
-# DUMMY DATA
-# users = {
-#     "max": {
-#         "name": "Max",
-#         "bio": "pro fps gamer"
-#     },
-#     "brad": {
-#         "name": "Brad",
-#         "bio": "decent fps gamer"
-#     },
-#     "cris": {
-#         "name": "Cris",
-#         "bio": "nooby fps gamer"
-#     }
-# }
+@app.route("/notfound")
+def unable_add():
+
+    return render_template("public/notfound.html")
 #===================================================================#
 @app.route("/profile/<userid>")
 def profile(userid):
