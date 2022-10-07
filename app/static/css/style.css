@@ -24,6 +24,7 @@ th, td {
     /* background-color: rgb(245, 146, 110); */
     text-align: left;
     border-bottom: 1px solid #ddd;
+    border-collapse: collapse;
     text-align: center;
 }
 
