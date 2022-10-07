@@ -1,3 +1,14 @@
+table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    width: 100%;
+    text-align: center;
+}
+
+
 head {
     background-color: #59d6bb;
 }
@@ -5,3 +16,15 @@ head {
 body {
     background-color: #8d8d8d;
 }
+
+
+
+th, td {
+    padding: 8px;
+    /* background-color: rgb(245, 146, 110); */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+tr:hover {background-color: yellowgreen;}
