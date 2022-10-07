@@ -15,5 +15,7 @@ $flask --debug run
 3. Create static dir next to template dir
 4. fill with static stuff like css,js,images
 5. Create base template and fill with child templates
+
+
 #============================================#
 
