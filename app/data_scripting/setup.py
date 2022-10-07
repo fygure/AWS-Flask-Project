@@ -151,7 +151,6 @@ def get_user_info(userid):
 #===========================================================================#
 def add_to_azure(user_data):
     connection = create_connection(DB_NAME, DB_USER, DB_PW, DB_HOST, DB_PORT)
-    #REDUNDANT.. FIX LATER PLS
     username = user_data["User"]["UserName"]
     group_info_user = iam_functions.get_user_group(username)
     temp_list = []
@@ -164,8 +163,16 @@ def add_to_azure(user_data):
     user_records = ", ".join(["%s"] * len(temp_list))
     insert_employee(connection, tupe, user_records)
     connection.close()
-
 #===========================================================================#
+def remove_from_azure(userid):
+    connection = create_connection(DB_NAME, DB_USER, DB_PW, DB_HOST, DB_PORT)
+
+    delete_query = (
+        f"DELETE FROM employees WHERE id = '{str(userid)}'"
+    )
+    cursor = connection.cursor()
+    cursor.execute(delete_query)
+    connection.close()
 #===========================================================================#
 #===========================================================================#
 #===========================================================================#

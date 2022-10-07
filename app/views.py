@@ -2,8 +2,8 @@
 from doctest import script_from_examples
 from venv import create
 from app import app
-from app.data_scripting.setup import get_employees_azure, get_user_info, add_to_azure
-from app.data_scripting.iam_functions import create_iam_user, add_user_to_default_group, get_user_info_iam
+from app.data_scripting.setup import get_employees_azure, get_user_info, add_to_azure, remove_from_azure
+from app.data_scripting.iam_functions import create_iam_user, add_user_to_default_group, get_user_info_iam, remove_user_from_group
 from flask import render_template, request, redirect
 from datetime import datetime
 
@@ -24,6 +24,7 @@ def index():
 # def userlist():
 #     return render_template("public/userlist.html")
 #===================================================================#
+# *Learning some stuff below here*
 # @app.route("/jinja")
 # def jinja():
 
@@ -126,10 +127,15 @@ def del_user():
 
         userid = req["id"]
 
-    #TODO -> query userid to azure db and delete (use a function)
-    #TODO -> then if success, delete from AWS IAMs (use a function)
-
+        #DONE -> query userid to azure db and delete (use a function)
+        #TODO -> then if success, delete from AWS IAMs (use a function)
+        # first remove user from their groups, then delete user
+        employee = get_user_info(userid)
+        print("Attempting to delete user from database and IAMs..")
+        print(employee)
         print(userid)
+        #remove_from_azure(userid)
+        
 
 
 

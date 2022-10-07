@@ -207,3 +207,16 @@ def get_user_group(username):
             print(f"Unexpected error: '{e}'")
     return response
 #===========================================================================#
+def remove_user_from_group(username, group):
+    try:
+        iam_client = boto3.client('iam')
+        response = iam_client.remove_group(
+            UserName=username,
+            GroupName=group
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] == 'EntityAlreadyExists':
+            print("Object already exists.")
+        else:
+            print(f"Unexpected error: '{e}'")
+#===========================================================================#
