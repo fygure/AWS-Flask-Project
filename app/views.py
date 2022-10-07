@@ -3,7 +3,7 @@ from doctest import script_from_examples
 from venv import create
 from app import app
 from app.data_scripting.setup import get_employees_azure, get_user_info, add_to_azure, remove_from_azure
-from app.data_scripting.iam_functions import create_iam_user, add_user_to_default_group, get_user_info_iam, remove_user_from_group
+from app.data_scripting.iam_functions import create_iam_user, add_user_to_default_group, get_user_info_iam, remove_user_from_group, delete_iam_user
 from flask import render_template, request, redirect
 from datetime import datetime
 
@@ -131,10 +131,15 @@ def del_user():
         #TODO -> then if success, delete from AWS IAMs (use a function)
         # first remove user from their groups, then delete user
         employee = get_user_info(userid)
-        print("Attempting to delete user from database and IAMs..")
         print(employee)
-        print(userid)
-        #remove_from_azure(userid)
+        group = employee[0][4]
+        username = employee[0][0]
+        #print(group)
+        print("Attempting to delete user from database and IAMs..")    
+        #print(userid)
+        remove_from_azure(userid)
+        remove_user_from_group(username=username, group=group)
+        delete_iam_user(username)
         
 
 

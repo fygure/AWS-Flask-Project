@@ -167,11 +167,14 @@ def add_to_azure(user_data):
 def remove_from_azure(userid):
     connection = create_connection(DB_NAME, DB_USER, DB_PW, DB_HOST, DB_PORT)
 
+    print(userid)
+
     delete_query = (
         f"DELETE FROM employees WHERE id = '{str(userid)}'"
     )
     cursor = connection.cursor()
     cursor.execute(delete_query)
+    connection.commit()
     connection.close()
 #===========================================================================#
 #===========================================================================#

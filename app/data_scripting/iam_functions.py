@@ -210,7 +210,7 @@ def get_user_group(username):
 def remove_user_from_group(username, group):
     try:
         iam_client = boto3.client('iam')
-        response = iam_client.remove_group(
+        iam_client.remove_user_from_group(
             UserName=username,
             GroupName=group
         )
