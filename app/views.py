@@ -81,14 +81,24 @@ def sign_up():
         username = req["username"]
 
         # add error handling here to catch if user puts space in string
-        flag = False
+        flag1 = False
         for i in username:
             if i.isspace():
-                flag = True
+                flag1 = True
+
+
+        flag2 = False
+        employees = get_employees_azure()
+
+        #print(type(employees[0][0]))
+
+        for i in employees:
+            if (i[0] == username):
+                flag2 = True
         
         print(username)
 
-        if not flag:
+        if not flag1 and not flag2:
     # function that will create an IAMs account for usernmame
             create_iam_user(username)
             add_user_to_default_group(username) #defaulted to 'Janitors' lol
@@ -128,7 +138,7 @@ def del_user():
         userid = req["id"]
 
         #DONE -> query userid to azure db and delete (use a function)
-        #TODO -> then if success, delete from AWS IAMs (use a function)
+        #DONE -> then if success, delete from AWS IAMs (use a function)
         # first remove user from their groups, then delete user
         employee = get_user_info(userid)
         print(employee)
@@ -141,8 +151,6 @@ def del_user():
         remove_user_from_group(username=username, group=group)
         delete_iam_user(username)
         
-
-
 
     return render_template("public/deleteuser.html")
 
