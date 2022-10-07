@@ -9,7 +9,7 @@ from datetime import datetime
 
 #Decorator route/view
 #===================================================================#
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
 
     users = get_employees_azure()
@@ -113,12 +113,12 @@ def sign_up():
     
     return render_template("public/createuser.html")
 #===================================================================#
-@app.route("/notfound")
+@app.route("/notfound", methods=["GET"])
 def unable_add():
 
     return render_template("public/notfound.html")
 #===================================================================#
-@app.route("/profile/<userid>")
+@app.route("/profile/<userid>", methods=["GET"])
 def profile(userid):
 
     user = get_user_info(userid)[0]
