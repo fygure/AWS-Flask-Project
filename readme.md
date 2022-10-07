@@ -12,8 +12,8 @@ $flask --debug run
 #============================================#
 1. Render the html template when someone comes to domain
 2. from flask import redner_template
+3. Create static dir next to template dir
+4. fill with static stuff like css,js,images
+5. Create base template and fill with child templates
 #============================================#
-1. Create static dir next to template dir
-2. fill with static stuff like css,js,images
-#============================================#
-1. Create base template and fill with child templates
+
