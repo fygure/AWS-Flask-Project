@@ -80,11 +80,16 @@ def sign_up():
 
         username = req["username"]
 
+        illegal_chars = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '+', '=', '[', ']', ';', ':']
+
         # add error handling here to catch if user puts space in string
         flag1 = False
         for i in username:
-            if i.isspace():
+            if i.isspace() or i in illegal_chars:
                 flag1 = True
+        
+        if len(username) > 15:
+            flag1 = True
 
 
         flag2 = False
