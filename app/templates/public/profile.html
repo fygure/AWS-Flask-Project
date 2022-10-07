@@ -13,11 +13,15 @@
         <div class="col">
             <h1>Profile</h1>
             
-                <!-- FIXME ADD FUNCTIONALITY TO DELETE BUTTON (POST REQUEST TO NEW PAGE) -->
+                <!-- fixed* ADD FUNCTIONALITY TO DELETE BUTTON (POST REQUEST TO NEW PAGE) -->
                 <!-- add function inside action "" -->
-                <form action="/deleteuser" method="post">
+                <form action="/deleteuser" method="POST">
+                    <!-- passes value of user id as a post request to deleteuser view -->
+                <input class="form-control" type="hidden" name="id" value="{{ user[1] }}">
+
                 <button type="submit" class="btn btn-primary">Delete User</button>
                 </form>
+                
 
             <hr>
 

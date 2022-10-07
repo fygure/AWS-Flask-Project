@@ -99,7 +99,6 @@ def sign_up():
             # add could not add user page error below (FIXME)
             return redirect("/notfound")
     
- 
     
     return render_template("public/createuser.html")
 #===================================================================#
@@ -121,7 +120,17 @@ def profile(userid):
 @app.route("/deleteuser", methods=["POST"])
 def del_user():
 
-    
+    if request.method == "POST":
+
+        req = request.form
+
+        userid = req["id"]
+
+    #TODO -> query userid to azure db and delete (use a function)
+    #TODO -> then if success, delete from AWS IAMs (use a function)
+
+        print(userid)
+
 
 
     return render_template("public/deleteuser.html")
