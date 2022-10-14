@@ -112,7 +112,7 @@ def sign_up():
             add_to_azure(user_data)
             return redirect("/") #req.url
         else:
-            # add could not add user page error below (FIXME)
+            # add could not add user page error below (FIXED)
             return redirect("/notfound")
     
     
